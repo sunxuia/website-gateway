@@ -1,0 +1,28 @@
+language: java
+install: true
+jdk:
+  - openjdk11
+services:
+  - docker
+  - redis-server
+cache:
+  directories:
+    - "$HOME/.cache"
+env:
+  global:
+    - secure: QBdy6mLerpMchSZKfMGsPyKlaoKOSiP9xDVT3iNhOwZo9J9OIf5kyoM6JB5ylPupajryaQDqBEREl+M42BalAJ7+tXctmOGYb9ojGEYrp6STRPUeDYE2nwncrW3EIZWynvAOHR1bHjSUDPcncFeoEjQpvD/1IPM3zoXzbDL7Rqsq4PloKtQT3amc/Nw7sQHvxugMQRAQrY63rX6I/FLxYV2wamrU3KWx+D3AAYyKiIftUPgVh5oTFwqd1SKz/dU25Mo0GzaodaqRTtdqQ8ZOc0j5fSNkZHh5l9dytLuB03FQKGo1+qYjwvTMEg54RBhIM+Yet25T0EVBRAbXMMpPRjMhHchaWWDyXFwHniraqXx4L82BIIy+OxSteMga4wQK6bPRuyLacw6zQ/iQwMqqNhV8griAUbug/pP+QPeB+E8BAPWLWgjagCyVIrt8nLAVYPRrpvQ/e5i5XZKQCqLJuKtJG2SW0QOe4D1lHwu5YrbjJIAB5u788P4Fc36nCLI4szLXocfeVDFrvI1bzHedvFF8lrjCPfcQfP/ShBRGvO/96HkOhT1pX2L4K+uDAav5bhzYdtDpqYNiH4LBxF30q6SKv3PBLPre2DAydx1MlU6Qq6lLALUkkMfp/3lXrEiJCPc96Pf16T/UNTvz0xFnDvdMMo4o0Rvz8F8Qw8XVFrY=
+    - secure: EYwTieUT/RMRvcCvXyuAM3DNsQR7YV1uMAj1VOfmg8CO5ZdKdKhMSBsIa/5g/CRgLyBg5myNIHZaLgM/kgFQr2BW/fhvhLcEslCC/y2upewSafyUFZmQGm3v/qE+XIxE/ZEZtE0M7dcaphr/+V/vmEbovRm+RIry54AyDqr/9LizhyvzpeaTIji2c1BBOSRG+gCHfjxLBeeQCDg5FAyOYe4wCkZk/Bntw1hW49wWoN1ZEa/SWMRTP5ozFBk+WnRjzYwB5u4PR3JsX7k0BDzS8711VzRZlDOvu1StXVABMCZ9488hgFeAij8IUT4T4653QEHs6OLzbXBjIJgc2t/Ml8cnOQq0a+wvfY4n5ZO8YOlBsHENmIRuyD0zBky/cs6uiT2WeeXLy4O2qOvt5S2CYKMOuIBJULlEwIenx0eWDnZeSnj7kDKsrikZBU7RTfQbVkB7snwkB9cXvOzG9tNhyZkhnZ5boLbwYfTYs9qqLeF6TFkqXcKK/zW3i1rKR0FKd1wIIoa17fiaNoW6tbt5So2l+U+bHJ1/K15sRVJe29ARolJkaO1nBod6GsX49GDZ25l69YsVHTrS+WiOZ/4Mt0nIyHXG0zS1QxaJn+0wI3mAdwOYXQNo7yp/23xHroBGaI1e5TWeXvY+lr9kvEoVbxx/UBFqNepm0BU2P+5gIIE=
+    - secure: O1W2Wnu6GkKuczdZD97etksH6EnO2NoY1wszLJ1Z2ETqwdIPCwL7v6i9pmBUd9Koe1NsQp7gw1fHGU5PiSp7a9y/O8kNYHzqgB+4bRJOwXByYAEPfsca0R+PPGz1iDX4UZX7E3F2V2MQfgSPjt2wqaStLZ48/nR2FD1O7G0hud2g8sKAZbmAm+aDUSQo+oFJozhs2AVA0tj2Ka+mbiGVJ3w+GRCttc4fHp9esJckOxDJCbaew7NpQyWSsU6neXS6KfVo1jCG2XECdkH/gp7rpuP/G3DyaQVjWXmhDWD4zqUbI30eKta7+KzPpxv69ppgjULfjJ/QVXjf9bIzx5SFbl7b46gd9RzE6RWqqxMb/1jLYRm5XzE3vuYefW9hW/+4rzfuqFN3YYc8d4aJHly7ZkIFtLMxj9mHCg9AwXcQV8HdtsxQGE7B1wx1p9G7KGHHVdFVIB/fZkGViPw6UK1WJhzIrc3YvQNEOOWlNfFyZOqEWyuG72Jt7H+jN7YPnebxbBG/QDYbJxjN4LVyghFZdG9tGZ7V1m4YM3l5F0hpPoJyG93IvcCcen9jPJERF2J7jl9PcNprP+mjMT/noBj+QjP+qIJTr119BRR7dDvo4rYlARMIzBtTtMJuu4+Joa7YuJB6T9QcdXRADIvErZrHwp4d6q6Z1oKvKnOWUOMhCWM=
+addons:
+  hosts:
+    - redis-server
+  sonarcloud:
+    organization: sunxuia
+    token:
+      secure: QtHBsYq/ny8xc0kfy1Zagcjhmvs2GDBIxv/QsNIFRZoUc7spjyEogXe62//JoLBWbtcZ8+eiXUYu70ElNBb7W0aMMhrRtFtAnIzpDLfCTAIEr5CEexXXbTji6QI+CBxgPrpRvqh8RMlf3MqF+3YmsfhUP2wqA3lN+W64yPurbIvP/6sVXFxqHPl8aidIlOb/SqoEqrYHS/ViNzvadQ/BAbi9MkjMwZREE2ZPgmsq3OXEJH1dYGVW8SHSfpg4l2Pwmwp26rvHdav6MQGV+YVuKc6XyfekaSvj/knnnLfm0Vyl+MLxIbtkq0EWFke+S93pRqLTC+RCWdCke5USOcres4gUgaN5cYumTPcWxp/n/CjIMvnvp9TiPK3QsWG80N4HQzFCCI+gJBRLmSK+qFBNX4LYDKWTlhy/LxfXq5lwu4+Z+tiBpeOswTQEmqGxCivcS/V2NfHygv/MifADE9ImCYrcRc1fMAHqdUMNZLj1b5O/QxmkFPPUXlD/KAmdRWckejQXO60kF5Ii3Q9VtE5MqXrktjmUMdEQ7gSd637k7nGY8lS0nbPbX7BMzG8m4AOXfvYdER/OI9SVf/U3M49sSVIPearyb8sFRwlwW+aJrJr433njgQxgOEUTFMiah73h9nhtHdtP134RYD+Ldz7nb0fd+3DMAfA0tHrdWQqg4Yk=
+  apt:
+    packages:
+      - docker-ce
+script:
+  - chmod +x build.sh && ./build.sh
+  - rm -f ~/.docker/config.json
