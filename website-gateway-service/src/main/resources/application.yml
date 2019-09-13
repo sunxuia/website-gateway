@@ -1,0 +1,24 @@
+server:
+  port: 8400
+
+logging.level:
+  root: info
+
+spring:
+  application:
+    name: gateway-service
+  redis:
+    host: redis-server
+    port: 6379
+    timeout: 3s
+    repositories.enable: false
+    database: 2
+  messages:
+    basename: messages, org.springframework.security.messages
+    encoding: utf-8
+
+website:
+  app:
+    id: 5
+    password: mx7hcmksw3
+  status-redirect-url: http://127.0.0.1:8200/auth/code
