@@ -1,5 +1,6 @@
 language: java
 install: true
+dist: xenial
 jdk:
   - openjdk11
 services:
