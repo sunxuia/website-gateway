@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mvn clean test
+mvn clean test -q
 
 if [[ $TRAVIS_PULL_REQUEST == "false" || $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]]; then
     echo "start sonarcloud scan"
