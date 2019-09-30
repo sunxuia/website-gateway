@@ -1,12 +1,10 @@
 package net.sunxu.website.service.gateway.controller;
 
 import java.time.Duration;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.sunxu.website.service.gateway.auth.UserPrincipal;
 import net.sunxu.website.service.gateway.dto.UserInfoDTO;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
@@ -20,11 +18,11 @@ import reactor.core.publisher.Mono;
 @RestController
 public class LoginController {
 
-    @Resource(name = "stringReactiveRedisTemplate")
-    private ReactiveRedisTemplate<String, String> redisTemplate;
-
     @Value("${website.status-redirect-url}")
     private String statusRedirectUrl;
+
+    @Value("${website.status-local-url}")
+    private String statusLocalUrl;
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -52,8 +50,7 @@ public class LoginController {
                 .switchIfEmpty(Mono.defer(() -> {
                     String redirect = statusRedirectUrl
                             + "?service=" + applicationName
-                            + "&redirect=" + exchange.getRequest().mutate().path("/login/code").build()
-                            .getURI();
+                            + "&redirect=" + statusLocalUrl;
                     var response = exchange.getResponse();
                     response.setStatusCode(HttpStatus.FOUND);
                     response.getHeaders().add("Location", redirect);

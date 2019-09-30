@@ -1,8 +1,16 @@
 server:
   port: 8400
+  use-forward-headers: true
 
 logging.level:
   root: info
+
+website:
+  app:
+    id: 5
+    password: mx7hcmksw3
+  status-redirect-url: http://127.0.0.1:8200/auth/code
+  status-local-url: http://127.0.0.1:8080/api/login/code
 
 spring:
   application:
@@ -16,9 +24,26 @@ spring:
   messages:
     basename: messages, org.springframework.security.messages
     encoding: utf-8
-
-website:
-  app:
-    id: 5
-    password: mx7hcmksw3
-  status-redirect-url: http://127.0.0.1:8200/auth/code
+  cloud.gateway:
+    routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+          - Path=/user/**
+        filters:
+          - PreserveHostHeader
+          - StripPrefix=1
+      - id: file-service
+        uri: lb://file-service
+        predicates:
+          - Path=/file/**
+        filters:
+          - PreserveHostHeader
+          - StripPrefix=1
+      - id: blog-service
+        uri: lb://blog-service
+        predicates:
+          - Path=/blog/**
+        filters:
+          - PreserveHostHeader
+          - StripPrefix=1
