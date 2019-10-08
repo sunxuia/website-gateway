@@ -56,9 +56,15 @@ public class CodeServerAuthenticationConverter implements ServerAuthenticationCo
                         session.getAttributes().put(TOKEN_ATTR_NAME, token);
                         session.getAttributes().put("AUTH_ID", token.getAuthId());
 
-                        var uri = exchange.getRequest().getURI();
-                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin",
-                                uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort());
+                        List<String> origins = exchange.getRequest().getHeaders().get("Origin");
+                        String origin;
+                        if (origins == null || origins.isEmpty()) {
+                            var uri = exchange.getRequest().getURI();
+                            origin = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+                        } else {
+                            origin = origins.get(0);
+                        }
+                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", origin);
                         return res;
                     });
         }
