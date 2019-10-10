@@ -1,12 +1,3 @@
 spring:
-  cloud:
-    consul:
-      host: consul-server
-      port: 8500
-      discovery:
-        prefer-ip-address: true
-        ip-address: 192.168.137.1
-        health-check-interval: 60s
-        health-check-critical-timeout: 180s
-      config:
-        enabled: false
+  profiles:
+    active: dev
