@@ -10,6 +10,7 @@ import net.sunxu.website.service.gateway.util.ConstValueDef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -23,6 +24,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
     private static final String AUTHORIZATION = "Authorization";
 
     @Autowired
+    @Lazy
     private AuthFeignClient authFeignClient;
 
     private ExecutorService threadPool = ThreadPoolHelpUtils.newFixedThreadExecutor("refresh-token", 8);
