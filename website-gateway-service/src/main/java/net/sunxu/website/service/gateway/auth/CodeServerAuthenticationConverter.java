@@ -55,20 +55,28 @@ public class CodeServerAuthenticationConverter implements ServerAuthenticationCo
 
                         session.getAttributes().put(TOKEN_ATTR_NAME, token);
                         session.getAttributes().put("AUTH_ID", token.getAuthId());
-
-                        List<String> origins = exchange.getRequest().getHeaders().get("Origin");
-                        String origin;
-                        if (origins == null || origins.isEmpty()) {
-                            var uri = exchange.getRequest().getURI();
-                            origin = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
-                        } else {
-                            origin = origins.get(0);
-                        }
-                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", origin);
+                        addAccessControlAllowOrigin(exchange);
                         return res;
+                    }).onErrorMap(err -> {
+                        addAccessControlAllowOrigin(exchange);
+                        log.error("Error while get code: " + err.getMessage());
+                        return err;
                     });
         }
         return Mono.empty();
+    }
+
+    private void addAccessControlAllowOrigin(ServerWebExchange exchange) {
+        List<String> origins = exchange.getRequest().getHeaders().get("Origin");
+        String origin;
+        if (origins == null || origins.isEmpty()) {
+            var uri = exchange.getRequest().getURI();
+            origin = uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+        } else {
+            origin = origins.get(0);
+        }
+        exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", origin);
+        exchange.getResponse().getHeaders().add("Access-Control-Allow-Credentials", "true");
     }
 
     private Claims parseClaims(String token) {

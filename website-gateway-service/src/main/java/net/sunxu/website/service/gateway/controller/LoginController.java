@@ -21,8 +21,8 @@ public class LoginController {
     @Value("${website.status-redirect-url}")
     private String statusRedirectUrl;
 
-    @Value("${website.status-local-url}")
-    private String statusLocalUrl;
+    @Value("${website.service-url}")
+    private String serviceUrl;
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -50,7 +50,7 @@ public class LoginController {
                 .switchIfEmpty(Mono.defer(() -> {
                     String redirect = statusRedirectUrl
                             + "?service=" + applicationName
-                            + "&redirect=" + statusLocalUrl;
+                            + "&redirect=" + serviceUrl + "/login/code";
                     var response = exchange.getResponse();
                     response.setStatusCode(HttpStatus.FOUND);
                     response.getHeaders().add("Location", redirect);
@@ -62,8 +62,7 @@ public class LoginController {
     public Mono<Void> redirect(@RequestParam("redirect") String redirect, ServerWebExchange exchange) {
         String redirectUrl = statusRedirectUrl
                 + "?service=" + applicationName
-                + "&redirect=" + exchange.getRequest().mutate().path("/login/page").build()
-                .getURI();
+                + "&redirect=" + serviceUrl + "/login/page";
         var response = exchange.getResponse();
         response.setStatusCode(HttpStatus.FOUND);
         response.getHeaders().add("Location", redirectUrl);

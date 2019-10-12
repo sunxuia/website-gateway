@@ -10,7 +10,7 @@ website:
     id: 5
     password: mx7hcmksw3
   status-redirect-url: http://127.0.0.1:8200/auth/code
-  status-local-url: http://127.0.0.1:8080/api/login/code
+  service-url: http://127.0.0.1:8400
 
 spring:
   application:
