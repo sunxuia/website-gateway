@@ -145,7 +145,7 @@ public class CustomSessionRepository implements ReactiveSessionRepository<RedisS
         String indexKey = getAuthIdKey(authId);
         return sessionRedisOperations.delete(
                 sessionRedisOperations.opsForValue()
-                        .get(authId)
+                        .get(indexKey)
                         .cast(String.class)
                         .map(CustomSessionRepository::getSessionKey))
                 .then(sessionRedisOperations.delete(indexKey))
